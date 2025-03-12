@@ -1,0 +1,263 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Nati Jewelry",
+    "theme_version": "1.0.0",
+    "theme_author": "Developer",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Main colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary color",
+        "default": "#d4af37"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_light",
+        "label": "Primary light",
+        "default": "#e8ce7a"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_dark",
+        "label": "Primary dark",
+        "default": "#b28e1c"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_light",
+        "label": "Secondary light",
+        "default": "#555555"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_dark",
+        "label": "Secondary dark",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "header",
+        "content": "Background colors"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_background_light",
+        "label": "Background light",
+        "default": "#f9f9f9"
+      },
+      {
+        "type": "header",
+        "content": "Text colors"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Text light",
+        "default": "#777777"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "serif"
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_base",
+        "min": 20,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "label": "Base heading size",
+        "default": 34
+      },
+      {
+        "type": "select",
+        "id": "font_heading_weight",
+        "label": "Heading weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light"
+          },
+          {
+            "value": "400",
+            "label": "Regular"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          },
+          {
+            "value": "600",
+            "label": "Semibold"
+          },
+          {
+            "value": "700",
+            "label": "Bold"
+          }
+        ],
+        "default": "500"
+      },
+      {
+        "type": "header",
+        "content": "Body text"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "sans-serif"
+      },
+      {
+        "type": "range",
+        "id": "font_size_body",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Base body size",
+        "default": 16
+      },
+      {
+        "type": "select",
+        "id": "font_body_weight",
+        "label": "Body weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light"
+          },
+          {
+            "value": "400",
+            "label": "Regular"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          }
+        ],
+        "default": "400"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/youraccount"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/youraccount"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https://twitter.com/youraccount"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/youraccount"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube",
+        "info": "https://youtube.com/youraccount"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@youraccount"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Checkout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Checkout settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "checkout_logo_enable",
+        "label": "Show logo",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "checkout_accent_color",
+        "label": "Accent color",
+        "default": "#d4af37"
+      },
+      {
+        "type": "color",
+        "id": "checkout_button_color",
+        "label": "Button color",
+        "default": "#d4af37"
+      }
+    ]
+  }
+]

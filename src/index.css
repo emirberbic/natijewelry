@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-sans text-secondary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif;
+}
+
+.container {
+  @apply mx-auto px-4 max-w-7xl;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 inline-block font-semibold tracking-wide hover:bg-primary-dark transition duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-primary text-secondary px-6 py-3 inline-block font-semibold tracking-wide hover:bg-primary/10 transition duration-300;
+  }
+  
+  .nav-link {
+    @apply text-secondary hover:text-primary transition duration-300 uppercase text-sm tracking-wider font-medium;
+  }
+
+  .product-card {
+    @apply cursor-pointer;
+  }
+
+  .product-card-img {
+    @apply w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105;
+  }
+}
+
+/* Logo animation */
+@keyframes rotate-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo-rotation {
+  transform-origin: center center;
+  will-change: transform;
+}

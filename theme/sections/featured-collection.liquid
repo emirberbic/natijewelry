@@ -1,0 +1,388 @@
+<div class="featured-collection">
+  <div class="page-width">
+    <div class="featured-collection__header">
+      <div class="featured-collection__heading-wrapper">
+        <h2 class="featured-collection__heading">{{ section.settings.title }}</h2>
+        <div class="featured-collection__description">{{ section.settings.description }}</div>
+      </div>
+      
+      {% if section.settings.view_all %}
+        <a href="{{ section.settings.collection.url }}" class="featured-collection__view-all">
+          {{ section.settings.view_all_text }}
+          {% render 'icon-arrow-right' %}
+        </a>
+      {% endif %}
+    </div>
+    
+    <div class="featured-collection__grid">
+      {%- assign collection = collections[section.settings.collection] -%}
+      
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        <div class="featured-collection__product">
+          <a href="{{ product.url }}" class="product-card">
+            <div class="product-card__image-container">
+              {% if product.featured_image != blank %}
+                <img 
+                  src="{{ product.featured_image | img_url: '400x' }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="product-card__image"
+                  width="{{ product.featured_image.width }}"
+                  height="{{ product.featured_image.height }}"
+                  loading="lazy"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'product-card__image placeholder' }}
+              {% endif %}
+            </div>
+            
+            {% if product.compare_at_price_max > product.price %}
+              <span class="product-card__badge product-card__badge--sale">{{ 'products.product.on_sale' | t }}</span>
+            {% endif %}
+            
+            {% for tag in product.tags %}
+              {% if tag == 'new' %}
+                <span class="product-card__badge product-card__badge--new">{{ 'products.product.new' | t }}</span>
+              {% endif %}
+            {% endfor %}
+            
+            <h3 class="product-card__title">{{ product.title }}</h3>
+            
+            <div class="product-card__price">
+              {% if product.compare_at_price_max > product.price %}
+                <span class="product-card__price-item product-card__price-item--sale">{{ product.price | money }}</span>
+                <span class="product-card__price-item product-card__price-item--compare">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span class="product-card__price-item">{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% style %}
+.featured-collection {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+}
+
+.featured-collection__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.featured-collection__heading-wrapper {
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.featured-collection__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: {{ section.settings.heading_size }}px;
+  margin: 0 0 10px;
+  color: {{ section.settings.heading_color }};
+}
+
+.featured-collection__description {
+  color: {{ section.settings.text_color }};
+}
+
+.featured-collection__view-all {
+  display: flex;
+  align-items: center;
+  color: {{ section.settings.link_color }};
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.featured-collection__view-all:hover {
+  color: {{ section.settings.link_hover_color }};
+}
+
+.featured-collection__view-all svg {
+  margin-left: 8px;
+}
+
+.featured-collection__grid {
+  display: grid;
+  grid-template-columns: repeat({{ section.settings.products_per_row_desktop }}, 1fr);
+  gap: 30px;
+}
+
+@media screen and (max-width: 989px) {
+  .featured-collection__grid {
+    grid-template-columns: repeat({{ section.settings.products_per_row_tablet }}, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .featured-collection__grid {
+    grid-template-columns: repeat({{ section.settings.products_per_row_mobile }}, 1fr);
+    gap: 20px;
+  }
+  
+  .featured-collection__header {
+    flex-direction: column;
+  }
+  
+  .featured-collection__view-all {
+    margin-top: 10px;
+  }
+}
+
+.product-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card__image-container {
+  position: relative;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.product-card__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.05);
+}
+
+.product-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 4px 8px;
+}
+
+.product-card__badge--sale {
+  background-color: {{ section.settings.sale_badge_color }};
+  color: {{ section.settings.sale_badge_text_color }};
+}
+
+.product-card__badge--new {
+  background-color: {{ section.settings.new_badge_color }};
+  color: {{ section.settings.new_badge_text_color }};
+}
+
+.product-card__title {
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0 0 5px;
+  color: {{ section.settings.product_title_color }};
+}
+
+.product-card__price {
+  font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-card__price-item {
+  color: {{ section.settings.price_color }};
+}
+
+.product-card__price-item--sale {
+  color: {{ section.settings.sale_price_color }};
+}
+
+.product-card__price-item--compare {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured Collection",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Explore our carefully selected pieces, each crafted with precision and passion.</p>",
+      "label": "Description"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Products to show"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Products per row (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_tablet",
+      "min": 2,
+      "max": 3,
+      "step": 1,
+      "default": 3,
+      "label": "Products per row (tablet)"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "default": 2,
+      "label": "Products per row (mobile)"
+    },
+    {
+      "type": "checkbox",
+      "id": "view_all",
+      "default": true,
+      "label": "Show 'View all' link"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "default": "View All Products",
+      "label": "View all text"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#333333",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#555555",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "default": "#d4af37",
+      "label": "Link color"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "default": "#b28e1c",
+      "label": "Link hover color"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "default": "#333333",
+      "label": "Product title color"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "default": "#333333",
+      "label": "Price color"
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "default": "#d4af37",
+      "label": "Sale price color"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_color",
+      "default": "#d4af37",
+      "label": "Sale badge color"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_text_color",
+      "default": "#ffffff",
+      "label": "Sale badge text color"
+    },
+    {
+      "type": "color",
+      "id": "new_badge_color",
+      "default": "#333333",
+      "label": "New badge color"
+    },
+    {
+      "type": "color",
+      "id": "new_badge_text_color",
+      "default": "#ffffff",
+      "label": "New badge text color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
